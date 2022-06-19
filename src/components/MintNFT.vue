@@ -101,9 +101,10 @@ export default {
 
         return true;
     },
-    showHash(value) {
-        this.isTransaction = 0;
-        this.transactionHash = value;
+    setNetwork(web3) {
+        web3.eth.getChainId().then(id => {
+            this.network = Network.NETWORK_MAP[id];
+        });
     }
   },
   async mounted() {
@@ -117,8 +118,17 @@ export default {
         let balance = await web3.eth.getBalance(this.account);
         console.log("账户余额:"+balance)
 
-        web3.eth.getChainId().then(id => {
+        this.setNetwork(web3);
+
+        // 监听网络切换
+        window.ethereum.on('chainChanged', (id) => {
+            id = Number(id).toString(10)
             this.network = Network.NETWORK_MAP[id];
+        });
+
+        // 监听账号切换
+        window.ethereum.on('accountsChanged', (newAccounts) => {
+            this.account = newAccounts[0];
         });
     }
   }
