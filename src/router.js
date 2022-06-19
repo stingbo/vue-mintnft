@@ -17,6 +17,11 @@ const routes = [
     name: "add",
     component: () => import("./components/AddTodo"),
   },
+  {
+    path: "/mint",
+    name: "mint-NFT",
+    component: () => import("./components/MintNFT"),
+  },
 ];
 
 const router = createRouter({

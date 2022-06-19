@@ -9,6 +9,9 @@
         <li class="nav-item">
           <router-link to="/add" class="nav-link">新增任务</router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/mint" class="nav-link">铸造NFT</router-link>
+        </li>
       </div>
     </nav>
 
